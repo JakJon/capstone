@@ -1,15 +1,37 @@
 mat-card{
-    margin: 20px;
-    padding: 5px 20px;
+    margin: 0 auto;
+    padding: 10px 25px 40px;
     box-shadow: 3px 3px 5px 6px #ccc;
+    width: 50%;
+    left: 0;
+    right: 0;
 }
 
 h1, h2 {
     margin: 0 8px;
 }
 
+p {
+    margin: 17px 22px;
+}
+
+.songControls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .titleText {
     display: flex;
     flex-direction: row;
     align-items: baseline;
+    margin: 20px 0;
+    justify-content: center;
+}
+
+.bottomRow {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
 }
