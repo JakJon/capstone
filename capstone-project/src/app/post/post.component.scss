@@ -1,0 +1,15 @@
+mat-card{
+    margin: 20px;
+    padding: 5px 20px;
+    box-shadow: 3px 3px 5px 6px #ccc;
+}
+
+h1, h2 {
+    margin: 0 8px;
+}
+
+.titleText {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
