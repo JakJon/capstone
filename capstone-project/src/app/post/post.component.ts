@@ -5,21 +5,25 @@ import { Component, OnInit, Input } from '@angular/core';
   template: `
   <div class="container">
     <mat-card>
-
-      <div class="topRow">
-        <div class="titleText">
-          <h1>{{songName}}</h1>
-          <h2>{{bandName}}</h2>
+      <div class="leftSide">
+        <div class="topRow">
+          <div class="titleText">
+            <h1>{{songName}}</h1>
+            <h2>{{songArtist}}</h2>
+          </div>
+        </div>
+        <div class="bottomRow">
+          <div class="songControls">
+            <iframe class="song" width="300" height="75px" [src]="songURL | urlSanitizer" frameborder="0" end=170 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <mat-slider min="1" max="100" step="1" value="1"></mat-slider>
+          </div>
         </div>
       </div>
-      <div class="bottomRow">
+      <mat-divider [vertical]="true"></mat-divider>
+      <div class="rightSide">
         <p class="userText">Posted By: Jake Jones</p>
-        <div class="songControls">
-          <iframe class="song" width="100" height="75px" src="https://www.youtube.com/embed/BEKTloAExfs?start=165" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          <mat-slider min="1" max="100" step="1" value="1"></mat-slider>
-        </div>
+        <h3>{{songDescription}}</h3>
       </div>
-
     </mat-card>
   </div>
   `,
@@ -27,8 +31,10 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class PostComponent implements OnInit {
 
+  @Input() songURL: string;
   @Input() songName: string;
-  @Input() bandName: string;
+  @Input() songArtist: string;
+  @Input() songDescription: string;
 
   constructor() { }
 

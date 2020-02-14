@@ -1,4 +1,6 @@
 mat-card{
+    display: flex;
+    flex-direction: row;
     margin: 0 auto;
     padding: 10px 25px 40px;
     box-shadow: 3px 3px 5px 6px #ccc;
@@ -7,12 +9,18 @@ mat-card{
     right: 0;
 }
 
-h1, h2 {
-    margin: 0 8px;
+mat-slider {
+    width: 300px;
 }
 
-p {
+h1, h2 {
+    margin: 0 8px;
+    color: #384449
+}
+
+p, h3 {
     margin: 17px 22px;
+    color: #384449;
 }
 
 .songControls {
@@ -26,6 +34,7 @@ p {
     flex-direction: row;
     align-items: baseline;
     margin: 20px 0;
+    min-width: 350px;
     justify-content: center;
 }
 
