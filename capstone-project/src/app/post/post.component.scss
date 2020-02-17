@@ -1,7 +1,7 @@
 @import '../variables.scss';
 
 mat-card{
-    @include sm {
+    @include md {
         flex-direction: column;
         width: 100%;
         height: inherit;
@@ -9,7 +9,7 @@ mat-card{
         padding: 0;
     }
 
-    @include lg {
+    @include xl {
         width: 100%;
         margin: 0;
         padding: 0;
@@ -18,9 +18,9 @@ mat-card{
     display: flex;
     flex-direction: row;
     margin: 0 auto;
-    padding: 20px 25px;
+    padding: 8px 24px;
     box-shadow: 3px 3px 5px 6px #ccc;
-    width: 50%;
+    width: 75%;
     left: 0;
     right: 0;
 }
@@ -35,17 +35,20 @@ h1, h2 {
 }
 
 p, h3 {
-    margin: 17px 0 17px 22px;
+    margin: 8px 0 16px 24px;
     color: #384449;
 }
 
 .leftSide {
-    margin: 20px;
+    margin: 8px;
     position: relative;
-    width: 100%
 }
 
-.songControls {
+.rightSide {
+    width: 100%;
+}
+
+.vidContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -53,19 +56,21 @@ p, h3 {
 
 .description{
     text-align: justify;
-    margin: 17px 22px;   
+    margin: 16px 24px;   
     font-weight: 500;
 }
 
 .titleText {
-    @include sm {
+    @include md {
         flex-direction: column;
         align-items: center;
+        min-width: 100%;
+
     }
     display: flex;
     flex-direction: row;
     align-items: baseline;
-    margin: 20px 0;
-    min-width: 350px;
+    margin: 8px 0;
+    min-width: 400px;
     justify-content: center;
 }

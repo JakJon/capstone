@@ -10,8 +10,8 @@ import { Component, OnInit, Input } from '@angular/core';
           <h1>{{songName}}</h1>
           <h2>{{songArtist}}</h2>
         </div>
-          <div class="songControls">
-            <iframe class="song" width="300" height="75px" [src]="songURL | urlSanitizer" frameborder="0" end=170 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <div class="vidContainer">
+            <iframe class="song" width="300" height="100" [src]="songURL | urlSanitizer" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
       </div>
       <mat-divider [vertical]="true"></mat-divider>
