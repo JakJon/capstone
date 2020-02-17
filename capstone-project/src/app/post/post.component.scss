@@ -1,8 +1,24 @@
+@import '../variables.scss';
+
 mat-card{
+    @include sm {
+        flex-direction: column;
+        width: 100%;
+        height: inherit;
+        margin: 0;
+        padding: 0;
+    }
+
+    @include lg {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
     display: flex;
     flex-direction: row;
     margin: 0 auto;
-    padding: 10px 25px 40px;
+    padding: 20px 25px;
     box-shadow: 3px 3px 5px 6px #ccc;
     width: 50%;
     left: 0;
@@ -19,8 +35,14 @@ h1, h2 {
 }
 
 p, h3 {
-    margin: 17px 22px;
+    margin: 17px 0 17px 22px;
     color: #384449;
+}
+
+.leftSide {
+    margin: 20px;
+    position: relative;
+    width: 100%
 }
 
 .songControls {
@@ -29,18 +51,21 @@ p, h3 {
     align-items: center;
 }
 
+.description{
+    text-align: justify;
+    margin: 17px 22px;   
+    font-weight: 500;
+}
+
 .titleText {
+    @include sm {
+        flex-direction: column;
+        align-items: center;
+    }
     display: flex;
     flex-direction: row;
     align-items: baseline;
     margin: 20px 0;
     min-width: 350px;
-    justify-content: center;
-}
-
-.bottomRow {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
     justify-content: center;
 }
