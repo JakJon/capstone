@@ -10,6 +10,11 @@ $screen-lg-min: 992px;
 // Large tablets and desktops
 $screen-xl-min: 1200px;
 
+@keyframes blinking-fade {
+    0%   { opacity: .5; }
+    100% { opacity: 1; }
+}
+
 // Small devices
 @mixin sm {
     @media (max-width: #{$screen-sm-min}) {

@@ -11,12 +11,15 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UrlSanitizerPipe } from './pipes/url-sanitizer.pipe';
+import {MatButtonModule} from '@angular/material/button';
+import { CompositionComponent } from './composition/composition.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PostComponent,
-    UrlSanitizerPipe
+    UrlSanitizerPipe,
+    CompositionComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,8 @@ import { UrlSanitizerPipe } from './pipes/url-sanitizer.pipe';
     MatMenuModule,
     MatToolbarModule,
     MatDividerModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

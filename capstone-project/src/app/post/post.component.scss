@@ -52,6 +52,11 @@ p, h3 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-radius: 10px;
+    width: 300px;
+    overflow: hidden;
+    justify-content: center;
+    margin: 0 auto;
 }
 
 .description{
