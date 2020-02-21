@@ -9,7 +9,7 @@ mat-card{
         padding: 0;
     }
 
-    @include xl {
+    @include lg {
         width: 100%;
         margin: 0;
         padding: 0;
@@ -60,6 +60,9 @@ p, h3 {
 }
 
 .description{
+    @include md {
+        text-align: center;     
+    }
     text-align: justify;
     margin: 16px 24px;   
     font-weight: 500;

@@ -12,6 +12,14 @@
   align-items: center;
 }
 
+.fab {
+  position: fixed;
+  z-index: 2;
+  font-size: 28px;
+  margin: calc(130%) calc(23%);
+  height: 75px;
+  width: 75px;
+}
 .logo{
   content: url("./svg/dolphin.svg");
 }

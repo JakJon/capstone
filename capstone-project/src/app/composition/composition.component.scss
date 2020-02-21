@@ -9,11 +9,55 @@ mat-card {
     right: 0;
     opacity: 80;
 
-    animation: blinking-fade 1.5s infinite;
+    animation: blinking-fade 2s infinite;
+    animation-timing-function: linear;
+}
+
+.controls {
+    @include md {
+        flex-direction: column;
+    }
+    display: flex;
+    justify-content: space-around;
+}
+
+.input-form {
+    margin: 0 10px;
+    position: relative;
+    width: 100%;
+    align-items: baseline;
+}
+
+.song-info{    
+    margin: 0px 24px 0 0;
+}
+
+.right-side {
+    @include gt-md {
+        align-items: center;        
+    }
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.timing {
+    display: flex;
+    flex-direction: column;
+}
+
+.buttons {
+    @include md {
+        justify-content: center;        
+    }
+    display: flex;
+    margin: 0 16px;
 }
 
 @keyframes blinking-fade {
-    0%   { opacity: .85; }
-    50% { opacity: 1; }
-    100%   { opacity: .85; }
+    0%   {  border-radius: 10px; border: solid 3px transparent;}
+    25% {   border-radius: 15px; border: solid 3px rgb(161, 66, 161);}
+    50% {   border-radius: 25px; border: solid 3px rgb(173, 0, 173);}
+    75% {   border-radius: 15px; border: solid 3px rgb(161, 66, 161);}
+    100%{  border-radius: 10px; border: solid  3px transparent;}
 }
