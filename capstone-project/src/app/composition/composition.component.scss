@@ -57,7 +57,7 @@ mat-card {
 @keyframes blinking-fade {
     0%   {  border-radius: 10px; border: solid 3px transparent;}
     25% {   border-radius: 15px; border: solid 3px rgb(161, 66, 161);}
-    50% {   border-radius: 25px; border: solid 3px rgb(173, 0, 173);}
+    50% {   border-radius: 30px; border: solid 3px rgb(173, 0, 173);}
     75% {   border-radius: 15px; border: solid 3px rgb(161, 66, 161);}
     100%{  border-radius: 10px; border: solid  3px transparent;}
 }

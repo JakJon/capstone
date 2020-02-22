@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Post } from '../models/post.interface';
 
 @Component({
   selector: 'app-composition',
@@ -9,27 +9,31 @@ import { FormsModule } from '@angular/forms';
       <div class="song-info">
         <mat-form-field class="input-form">
           <mat-label>Song Artist</mat-label>
-          <input matInput placeholder="Ex. The Strokes">
+          <input id="artist" matInput placeholder="Ex. The Strokes">
         </mat-form-field>
         <mat-form-field class="input-form">
           <mat-label>Song Title</mat-label>
-          <input matInput placeholder="Ex. Bohemian Rhapsody">  
+          <input id="title" matInput placeholder="Ex. Bohemian Rhapsody">  
         </mat-form-field>
         <mat-form-field class="input-form">
           <mat-label>YoutTube URL</mat-label>
-          <input matInput placeholder="Ex. www.youtube.com/4N4j7dNB4q4">
+          <input id="url" matInput placeholder="Ex. www.youtube.com/4N4j7dNB4q4">
         </mat-form-field>
       </div>
       <div class="right-side">
         <div class="timing">
           <mat-checkbox class="example-margin" [(ngModel)]="checked">Start / End Times</mat-checkbox>
           <mat-form-field *ngIf="checked" class="timing-info">
-            <mat-label>Start at? (In Seconds)</mat-label>
-            <input matInput placeholder="131">
+            <mat-label>Start at?</mat-label>
+            <input id="start" matInput placeholder="Ex. 40">
+            <mat-hint align="start"><strong>In Seconds</strong></mat-hint>
+            <mat-hint align="end">0:35 = 35</mat-hint>
           </mat-form-field>
           <mat-form-field *ngIf="checked" class="timing-info">
             <mat-label>End at?</mat-label>
-            <input matInput placeholder="155">
+            <input id="end" matInput placeholder="Ex. 102">
+            <mat-hint align="start"><strong>In Seconds</strong></mat-hint>
+            <mat-hint align="end">2:00 = 120</mat-hint>
           </mat-form-field>  
         </div>
         <div class="buttons">
@@ -39,15 +43,19 @@ import { FormsModule } from '@angular/forms';
         </div>
       </div>        
   </mat-card>
-
   `,
   
   styleUrls: ['./composition.component.scss']
 })
 export class CompositionComponent implements OnInit {
-  checked = false;
+  public checked = false;
+  public post : Post;
+  public inputStartTime? : number;
+  public inputEndTime? : number; 
+  public inputUrl? : string; 
 
   @Output() cancel = new EventEmitter<boolean>();
+  @Output() newPost = new EventEmitter<Post>();
 
   constructor() { }
 
@@ -60,7 +68,38 @@ export class CompositionComponent implements OnInit {
   }
 
   createPost() {
+    if(this.inputStartTime){
+      this.inputStartTime = +(<HTMLInputElement>document.getElementById("start")).value;
+    }
+    if(this.inputEndTime){
+      this.inputEndTime = +(<HTMLInputElement>document.getElementById("end")).value
+    }
+    this.inputUrl = (<HTMLInputElement>document.getElementById("url")).value;
 
+    //TODO: use not hardcoded values here 
+    this.post = {
+    user : "Jake Jones",
+    likes: 0,
+    song: {
+      songArtist : (<HTMLInputElement>document.getElementById("artist")).value,
+      songTitle : (<HTMLInputElement>document.getElementById("title")).value,
+      songUrl : this.formatURL(this.inputUrl, this.inputStartTime, this.inputEndTime)
+      }
+    }
+    console.log(this.post);
+    this.newPost.emit(this.post);
   }
 
+  
+  formatURL(url: string, start?: number, end?: number): string {
+    let u: string;
+    if (url && start && end) {
+    u = `https://www.youtube.com/embed/${url}?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=${start}&end=${end}`
+    } else if (url && start) {
+    u = `https://www.youtube.com/embed/${url}?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=${start}`  
+    } else {
+    u = `https://www.youtube.com/embed/${url}?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0`  
+    }
+    return u;
+  }
 }

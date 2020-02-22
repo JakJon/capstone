@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Post } from './models/post.interface';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ import { Component, OnInit } from '@angular/core';
       <button class="fab" *ngIf="mobile" mat-fab color="primary" (click)="createPost()">+</button>
       <app-composition 
         (cancel)="onCancel($event)"
+        (newPost)="onCreatePost($event)"
         id="composition" 
         *ngIf="creatingPost">
       </app-composition>
@@ -44,7 +46,7 @@ export class AppComponent implements OnInit {
   title = 'capstone-project';
   creatingPost: boolean = false;
   mobile: boolean;
-
+  postFeed: Post[] = [];
 
   ngOnInit(): void {
 
@@ -55,8 +57,12 @@ export class AppComponent implements OnInit {
     }
   }
 
+  onCreatePost(post: Post) {
+      this.postFeed.push(post);
+      console.log(this.postFeed);
+  }
+
   onCancel(cancel: boolean) {
-    console.log(cancel + "yeeeeeEEEEEEEET");
     if (cancel) {
       this.creatingPost = false;
     }

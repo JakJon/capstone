@@ -1,4 +1,5 @@
-{"post": {
+{
+"post": {
     "id": 1,
     "user": "jake",
     "likes": 0,
@@ -8,5 +9,6 @@
         "songTitle": "boomb bap",
         "songStartTime": 0,
         "songEndTime": 1
+        }
     }
-}}
+}
