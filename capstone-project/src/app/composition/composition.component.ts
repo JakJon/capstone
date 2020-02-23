@@ -68,11 +68,11 @@ export class CompositionComponent implements OnInit {
   }
 
   createPost() {
-    if(this.inputStartTime){
+    if(+(<HTMLInputElement>document.getElementById("start")).value){
       this.inputStartTime = +(<HTMLInputElement>document.getElementById("start")).value;
     }
-    if(this.inputEndTime){
-      this.inputEndTime = +(<HTMLInputElement>document.getElementById("end")).value
+    if(+(<HTMLInputElement>document.getElementById("end")).value){
+      this.inputEndTime = +(<HTMLInputElement>document.getElementById("end")).value;
     }
     this.inputUrl = (<HTMLInputElement>document.getElementById("url")).value;
 
