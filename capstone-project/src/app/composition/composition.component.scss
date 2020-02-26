@@ -9,8 +9,15 @@ mat-card {
     right: 0;
     opacity: 80;
 
-    animation: blinking-fade 2s infinite;
+    animation: blinking-fade 2.5s infinite;
     animation-timing-function: linear;
+}
+
+textarea {
+    height: 150px;
+    max-height: 149px;
+    min-height: 149px;
+    width: 100%;
 }
 
 .controls {
@@ -21,7 +28,16 @@ mat-card {
     justify-content: space-around;
 }
 
-.input-form {
+.description{
+    height: inherit;
+    margin-bottom: 32px;
+}
+
+.description-input{
+    width: 100%;
+}
+
+.song-info-input {
     margin: 0 10px;
     position: relative;
     width: 100%;
@@ -32,7 +48,7 @@ mat-card {
     margin: 0px 24px 0 0;
 }
 
-.right-side {
+.timing-container {
     @include gt-md {
         align-items: center;        
     }
@@ -55,9 +71,9 @@ mat-card {
 }
 
 @keyframes blinking-fade {
-    0%   {  border-radius: 10px; border: solid 3px transparent;}
+    0%   {  border-radius: 10px; border: solid 3px rgba(179, 6, 179, 0.5)}
     25% {   border-radius: 15px; border: solid 3px rgb(161, 66, 161);}
-    50% {   border-radius: 30px; border: solid 3px rgb(173, 0, 173);}
+    50% {   border-radius: 35px; border: solid 3px transparent}
     75% {   border-radius: 15px; border: solid 3px rgb(161, 66, 161);}
-    100%{  border-radius: 10px; border: solid  3px transparent;}
+    100%{  border-radius: 10px; border: solid  3px rgb(179, 6, 179, 0.5);}
 }

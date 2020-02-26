@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { PostComponent } from './post/post.component';
 import { MatSliderModule } from '@angular/material/slider';
@@ -27,6 +27,7 @@ import { CompositionComponent } from './composition/composition.component';
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     MatSliderModule,
     MatCardModule,
     MatMenuModule,

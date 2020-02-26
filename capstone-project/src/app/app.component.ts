@@ -23,7 +23,7 @@ import { Post } from './models/post.interface';
           [songName]="p.song.songTitle" 
           [songArtist]="p.song.songArtist" 
           [songURL]="p.song.songUrl"
-          songDescription="bobby" >
+          [songDescription]="p.description" >
       </app-post>
       <app-post 
           songName="Stand Tall" 
