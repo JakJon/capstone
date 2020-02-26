@@ -9,7 +9,7 @@ mat-card{
         padding: 0;
     }
 
-    @include xl {
+    @include lg {
         width: 100%;
         margin: 0;
         padding: 0;
@@ -52,9 +52,17 @@ p, h3 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-radius: 10px;
+    width: 300px;
+    overflow: hidden;
+    justify-content: center;
+    margin: 0 auto;
 }
 
 .description{
+    @include md {
+        text-align: center;     
+    }
     text-align: justify;
     margin: 16px 24px;   
     font-weight: 500;
