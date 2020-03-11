@@ -82,7 +82,7 @@ namespace CapstoneApi.Controllers
             _context.PostModels.Add(postModel);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPostModel", new { id = postModel.Id }, postModel);
+            return CreatedAtAction(nameof(GetPostModel), new { id = postModel.Id }, postModel);
         }
 
         // DELETE: api/Post/5
