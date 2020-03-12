@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
+using CapstoneApi.Models;
 
 namespace CapstoneApi
 {
@@ -13,7 +15,19 @@ namespace CapstoneApi
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var host = CreateHostBuilder(args).Build();
+
+            using (var scope = host.Services.CreateScope())
+            {
+                //3. Get the instance of BoardGamesDBContext in our services layer
+                var services = scope.ServiceProvider;
+                var context = services.GetRequiredService<PostContext>();
+
+                //4. Call the DataGenerator to create sample data
+                DataGenerator.Initialize(services);
+            }
+            
+            host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
