@@ -1,5 +1,5 @@
-export interface Song {
-    songUrl : string;
-    songArtist : string;
-    songTitle : string;
-}
+// export interface Song {
+//     SongUrl : string;
+//     SongArtist : string;
+//     SongTitle : string;
+// }

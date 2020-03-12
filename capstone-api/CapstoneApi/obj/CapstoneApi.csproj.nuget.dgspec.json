@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\projects\\capstone\\capstone-api\\CapstoneApi\\CapstoneApi.csproj": {}
+    "F:\\Projects\\capstone\\capstone-api\\CapstoneApi\\CapstoneApi.csproj": {}
   },
   "projects": {
-    "F:\\projects\\capstone\\capstone-api\\CapstoneApi\\CapstoneApi.csproj": {
+    "F:\\Projects\\capstone\\capstone-api\\CapstoneApi\\CapstoneApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\projects\\capstone\\capstone-api\\CapstoneApi\\CapstoneApi.csproj",
+        "projectUniqueName": "F:\\Projects\\capstone\\capstone-api\\CapstoneApi\\CapstoneApi.csproj",
         "projectName": "CapstoneApi",
-        "projectPath": "F:\\projects\\capstone\\capstone-api\\CapstoneApi\\CapstoneApi.csproj",
+        "projectPath": "F:\\Projects\\capstone\\capstone-api\\CapstoneApi\\CapstoneApi.csproj",
         "packagesPath": "C:\\Users\\grobb\\.nuget\\packages\\",
-        "outputPath": "F:\\projects\\capstone\\capstone-api\\CapstoneApi\\obj\\",
+        "outputPath": "F:\\Projects\\capstone\\capstone-api\\CapstoneApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\grobb\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -37,6 +37,26 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
