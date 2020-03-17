@@ -1,4 +1,4 @@
-import { Injectable, Host } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Post } from '../models/post.interface';
 import { Observable } from 'rxjs';
@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
 })
 export class PostService {
 
-  singularPostUrl = "https://localhost:5001/api/Post/1";
   postsUrl = "https://localhost:5001/api/Post";
 
   constructor(private http: HttpClient) { }
@@ -17,11 +16,17 @@ export class PostService {
     return this.http.get<Post[]>(this.postsUrl);
   }
 
-  createPost(post: Post): Observable<Host> {
+  createPost(post: Post): Observable<Post> {
     return this.http.post<Post>(this.postsUrl, post);
   }
-  
-  getPost(): Observable<Post> {
-    return this.http.get<Post>(this.singularPostUrl);
+
+  deletePost(id: number): Observable<{}> {
+    const deleteURL = `https://localhost:5001/api/Post/${id}`;
+    return this.http.delete(deleteURL);
+  }
+
+  getSingularPost(id: number): Observable<Post> {
+    const URL = `https://localhost:5001/api/Post/${id}`;
+    return this.http.get<Post>(URL);
   }
 }

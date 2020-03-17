@@ -34,14 +34,30 @@ h1, h2 {
     color: #384449
 }
 
-p, h3 {
+h3 {
     margin: 8px 0 16px 24px;
     color: #384449;
 }
 
 .leftSide {
-    margin: 8px;
+    @include md {
+        padding: 16px;   
+    }
+    margin: auto auto 0;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+p {
+    margin: 0 24px;
 }
 
 .rightSide {
@@ -69,14 +85,7 @@ p, h3 {
 }
 
 .titleText {
-    @include md {
-        flex-direction: column;
-        align-items: center;
-        min-width: 100%;
-
-    }
     display: flex;
-    flex-direction: row;
     align-items: baseline;
     margin: 8px 0;
     min-width: 400px;

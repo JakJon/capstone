@@ -21,10 +21,13 @@ import { PostService } from './services/post.service';
         *ngIf="creatingPost">
       </app-composition>
       <app-post *ngFor="let p of postFeed"
+          [id]="p.id" 
           [songName]="p.songTitle" 
           [songArtist]="p.songArtist" 
           [songURL]="p.songUrl"
-          [songDescription]="p.description" >
+          [songDescription]="p.description" 
+          (delete)="onDeletePost()"
+          >
       </app-post>
     </div>
     `,
@@ -58,6 +61,10 @@ export class AppComponent implements OnInit {
   onCreatePost(post: Post) {
       this.postFeed.unshift(post);
       this.creatingPost = false;
+  }
+
+  onDeletePost() {
+    window.location.reload();
   }
 
   onCancel(cancel: boolean) {
