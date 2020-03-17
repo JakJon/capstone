@@ -8,12 +8,17 @@ import { Observable } from 'rxjs';
 })
 export class PostService {
 
-  apiUrl = "https://localhost:5001/api/Post/1";
+  postUrl = "https://localhost:5001/api/Post/1";
+  postsUrl = "https://localhost:5001/api/Post";
 
   constructor(private http: HttpClient) { }
 
-  getPosts(): Observable<Post> {
-    return this.http.get<Post>(this.apiUrl);
+  getPost(): Observable<Post> {
+    return this.http.get<Post>(this.postUrl);
+  }
+
+  getPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>(this.postsUrl);
   }
 
 }
