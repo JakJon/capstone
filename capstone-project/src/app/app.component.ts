@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Post } from './models/post.interface';
+import { PostService } from './services/post.service';
 
 @Component({
   selector: 'app-root',
@@ -20,24 +21,11 @@ import { Post } from './models/post.interface';
         *ngIf="creatingPost">
       </app-composition>
       <app-post *ngFor="let p of postFeed"
-          [songName]="p.song.songTitle" 
-          [songArtist]="p.song.songArtist" 
-          [songURL]="p.song.songUrl"
+          [songName]="p.songTitle" 
+          [songArtist]="p.songArtist" 
+          [songURL]="p.songUrl"
           [songDescription]="p.description" >
       </app-post>
-      <app-post 
-          songName="Stand Tall" 
-          songArtist="Childish Gambino" 
-          songURL="https://www.youtube.com/embed/WbsZnsr0lI4?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=292"
-          songDescription="Long Description Example: incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.">
-      </app-post>    
-      <app-post 
-          songName="Three Thirty" 
-          songArtist="Reaper" 
-          songURL="https://www.youtube.com/embed/BEKTloAExfs?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=165"
-          songDescription="Nice Bass Solo">
-      </app-post>
-      <app-post songName="The Others" songArtist="RENDEZ-VOUS" songURL="https://www.youtube.com/embed/fe6YO4KNbJk?start=150" songDescription="Intense synth-rock build up" ></app-post>
       <app-post 
           songName="skip" 
           songArtist="Superparka" 
@@ -52,19 +40,35 @@ export class AppComponent implements OnInit {
   title = 'capstone-project';
   creatingPost: boolean = false;
   mobile: boolean;
-  postFeed: Post[];
-
-  constructor() {
-    this.postFeed = [];
+  postFeed: Post[] = [];
+  constructor(private postService: PostService) {
   }
 
   ngOnInit(): void {
-
     if (screen.width < 768) {
       this.mobile = true;
     } else {
       this.mobile = false;
     }
+
+    this.loadPosts();
+  }
+
+  loadPosts() {
+    this.postService.getPosts()
+      .subscribe(post => {
+        this.postFeed.push(post);
+        });
+    
+    
+    // this.postService.getPosts()
+    //   .subscribe((data: Post) => this.postFeed.push({
+    //     songArtist: data['SongArtist'],
+    //     songTitle: data['SongTitle'],
+    //     songUrl: data['SongUrl'],
+    //     user: data['User'],
+    //     description: data['Description']
+    //   }))
   }
 
   onCreatePost(post: Post) {
@@ -80,5 +84,6 @@ export class AppComponent implements OnInit {
 
   createPost() {
     this.creatingPost = true;
+    console.log(this.postFeed);
   }
 }

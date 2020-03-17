@@ -107,14 +107,12 @@ export class CompositionComponent implements OnInit {
     this.inputUrl = (<HTMLInputElement>document.getElementById("url")).value;
 
     this.post = {
-    user : "Jake Jones",
-    description: (<HTMLInputElement>document.getElementById("description")).value,
-    likes: 0,
-    song: {
+      id : 100,
+      user : "Jake Jones",
+      description: (<HTMLInputElement>document.getElementById("description")).value,
       songArtist : (<HTMLInputElement>document.getElementById("artist")).value,
       songTitle : (<HTMLInputElement>document.getElementById("title")).value,
-      songUrl : this.formatURL(this.inputUrl, this.inputStartTime, this.inputEndTime)
-      }
+      songUrl : this.formatURL(this.inputUrl, this.inputStartTime, this.inputEndTime)  
     }
     this.newPost.emit(this.post);
   }

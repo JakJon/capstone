@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CapstoneApi.Models;
+using Microsoft.AspNetCore.Cors;
 
 namespace CapstoneApi.Controllers
-{
-    [Route("api/[controller]")]
+{   
+    [EnableCors("MainPolicy")]
     [ApiController]
+    [Route("api/[controller]")]
     public class PostController : ControllerBase
     {
         private readonly PostContext _context;
