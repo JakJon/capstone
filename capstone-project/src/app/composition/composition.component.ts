@@ -1,6 +1,7 @@
 import { Component, OnInit, DoCheck, EventEmitter, Output } from '@angular/core';
 import { Post } from '../models/post.interface';
 import { FormControl, Validators } from '@angular/forms';
+import { PostService } from '../services/post.service';
 
 @Component({
   selector: 'app-composition',
@@ -78,7 +79,7 @@ export class CompositionComponent implements OnInit {
   @Output() cancel = new EventEmitter<boolean>();
   @Output() newPost = new EventEmitter<Post>();
 
-  constructor() { }
+  constructor(private postService: PostService) { }
 
   ngOnInit(): void {
     
@@ -107,13 +108,14 @@ export class CompositionComponent implements OnInit {
     this.inputUrl = (<HTMLInputElement>document.getElementById("url")).value;
 
     this.post = {
-      id : 100,
       user : "Jake Jones",
       description: (<HTMLInputElement>document.getElementById("description")).value,
       songArtist : (<HTMLInputElement>document.getElementById("artist")).value,
       songTitle : (<HTMLInputElement>document.getElementById("title")).value,
       songUrl : this.formatURL(this.inputUrl, this.inputStartTime, this.inputEndTime)  
     }
+    this.postService.createPost(this.post)
+      .subscribe();
     this.newPost.emit(this.post);
   }
 
