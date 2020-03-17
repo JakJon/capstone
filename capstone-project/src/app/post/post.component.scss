@@ -91,3 +91,15 @@ p {
     min-width: 400px;
     justify-content: center;
 }
+
+mat-form-field {
+    padding: 8px;
+    width: 100%;
+}
+
+textarea {
+    height: 150px;
+    max-height: 149px;
+    min-height: 149px;
+    width: 100%;
+}

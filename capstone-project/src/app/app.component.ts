@@ -22,6 +22,7 @@ import { PostService } from './services/post.service';
       </app-composition>
       <app-post *ngFor="let p of postFeed"
           [id]="p.id" 
+          [user]="p.user"
           [songName]="p.songTitle" 
           [songArtist]="p.songArtist" 
           [songURL]="p.songUrl"
@@ -37,6 +38,7 @@ export class AppComponent implements OnInit {
   title = 'capstone-project';
   creatingPost: boolean = false;
   mobile: boolean;
+  error = false;
   postFeed: Post[] = [];
   constructor(private postService: PostService) {
   }

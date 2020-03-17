@@ -20,6 +20,11 @@ export class PostService {
     return this.http.post<Post>(this.postsUrl, post);
   }
 
+  updatePost(id: number, post: Post): Observable<Post> {
+    const putURL = `https://localhost:5001/api/Post/${id}`;
+    return this.http.put<Post>(putURL, post);
+  }
+
   deletePost(id: number): Observable<{}> {
     const deleteURL = `https://localhost:5001/api/Post/${id}`;
     return this.http.delete(deleteURL);
