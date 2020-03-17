@@ -1,7 +1,7 @@
 export interface Post {
-    User: string;
-    Description: string;
-    SongUrl : string;
-    SongArtist : string;
-    SongTitle : string;
+    user: string;
+    description: string;
+    songUrl : string;
+    songArtist : string;
+    songTitle : string;
 }
