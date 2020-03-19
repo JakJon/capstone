@@ -28,6 +28,14 @@ public class DataGenerator
         context.PostModels.AddRange(
             new PostModel{
                 Id = 1,
+                User = "Music Dude",
+                SongTitle="Three Thirty",
+                SongArtist="Reaper",
+                SongUrl="https://www.youtube.com/embed/BEKTloAExfs?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=165",
+                Description="Gnarly Bass Solo"
+            },
+            new PostModel{
+                Id = 2,
                 User = "Jake",
                 SongTitle="Stand Tall",
                 SongArtist="Childish Gambino",
@@ -35,15 +43,15 @@ public class DataGenerator
                 Description="Long Description Example: incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
             },
             new PostModel{
-                Id = 2,
-                User = "Music Dude",
-                SongTitle="Three Thirty",
-                SongArtist="Reaper",
-                SongUrl="https://www.youtube.com/embed/BEKTloAExfs?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=165",
-                Description="Nice Bass Solo"
-            },
-                        new PostModel{
                 Id = 3,
+                User = "Alien",
+                SongTitle="Lucid",
+                SongArtist="4b Ft. Austin Mahone & Abraham Mateo",
+                SongUrl="https://www.youtube.com/embed/Wsmr3UcxTz8?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=141&end=173",
+                Description="Cool choppy synth effects 👽"
+            },
+            new PostModel{
+                Id = 4,
                 User = "Daryl",
                 SongTitle="skip",
                 SongArtist="Superparka",
