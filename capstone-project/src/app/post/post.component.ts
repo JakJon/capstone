@@ -10,9 +10,13 @@ import { Post } from '../models/post.interface';
     <mat-card>
       <div class="leftSide">
         <div class="vidContainer">
-          <iframe class="song" width="300" height="100" [src]="songURL | urlSanitizer" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe [id]="this.idString" class="song" width="300" height="100" [src]="songURL | urlSanitizer" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div class="titleText">
+          <!--<button class="replay-button" *ngIf="!editMode" mat-mini-fab color="primary" (click)="refreshFrame()">O</button>-->
+          <button class="replay-button" *ngIf="!editMode" mat-icon-button color="primary" (click)="refreshFrame()">
+            <mat-icon>refresh</mat-icon>
+          </button>
           <h1 *ngIf="!editMode">{{songName}}</h1>
           <mat-form-field class="artist-title-input" *ngIf="editMode" class="song-info-input">
             <mat-label>Song Name</mat-label>
@@ -34,7 +38,7 @@ import { Post } from '../models/post.interface';
       <mat-divider [vertical]="true"></mat-divider>
       <div class="rightSide">
         <div class="post-header">
-          <p class="userText">Posted By: Jake Jones</p>
+          <p class="userText">Posted By: {{user}}</p>
           <div class="post-buttons">
             <button *ngIf="!editMode" mat-button color="warn" (click)="deletePost(id)">Delete</button>
             <button *ngIf="!editMode" mat-button color="primary" (click)="editPost()">Edit</button>
@@ -68,10 +72,13 @@ export class PostComponent implements OnInit {
 
   public editMode = false;
   public doneEditing = false;
+  public idString: string;
+
 
   constructor(private postService: PostService) { }
 
   ngOnInit(): void {
+    this.idString = this.id.toString();
   }
 
   ngDoCheck(): void {
@@ -101,6 +108,11 @@ export class PostComponent implements OnInit {
       window.location.reload();
     }
     this.editMode = false;
+  }
+
+  refreshFrame(){
+    // @ts-ignore
+    document.getElementById(this.idString).src = document.getElementById(this.idString).src;
   }
 
   validateInputs(): boolean {
