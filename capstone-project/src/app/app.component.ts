@@ -10,10 +10,13 @@ import { PostService } from './services/post.service';
           <div class="header">
               <i class="logo"></i>
               <h1 class="title">Sound Share</h1>
-              <button *ngIf="!mobile" mat-button color="primary" (click)="createPost()">Create Post</button>
+              <button *ngIf="!mobile && signedIn" mat-button color="primary" (click)="createPost()">Create Post</button>
+              <button *ngIf="!signedIn && !showLoginWindow" mat-button color="primary" (click)="toggleLoginWindow()">Sign In</button>
           </div>      
       </mat-toolbar>
-      <button class="fab" *ngIf="mobile" mat-fab color="primary" (click)="createPost()">+</button>
+      <button class="fab" *ngIf="mobile && signedIn" mat-fab color="primary" (click)="createPost()">+</button>
+      <app-login *ngIf="showLoginWindow">
+      </app-login>
       <app-composition 
         (cancel)="onCancel($event)"
         (newPost)="onCreatePost($event)"
@@ -38,6 +41,8 @@ export class AppComponent implements OnInit {
   title = 'capstone-project';
   creatingPost: boolean = false;
   mobile: boolean;
+  signedIn = false;
+  showLoginWindow = false;
   error = false;
   postFeed: Post[] = [];
   constructor(private postService: PostService) {
@@ -51,6 +56,10 @@ export class AppComponent implements OnInit {
     }
 
     this.loadPosts();
+  }
+
+  toggleLoginWindow(){
+    this.showLoginWindow = !this.showLoginWindow;
   }
 
   loadPosts() {
@@ -77,6 +86,5 @@ export class AppComponent implements OnInit {
 
   createPost() {
     this.creatingPost = true;
-    console.log(this.postFeed);
   }
 }

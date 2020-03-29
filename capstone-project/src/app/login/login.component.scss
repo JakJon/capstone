@@ -1,0 +1,23 @@
+@import '../variables.scss';
+
+mat-card {
+    margin: 16px auto 0;
+    padding: 8px 24px;
+    box-shadow: 3px 3px 5px 6px #ccc;
+    width: 75%;
+
+    display: flex;
+    align-items: baseline;
+    justify-content: space-around;
+
+    animation: blinking-fade 2.5s infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes blinking-fade {
+    0%   {  border-radius: 10px; border: solid 4px rgba(0, 57, 149, 0.5);}
+    25% {   border-radius: 15px; border: solid 4px rgb(0, 73, 209);}
+    50% {   border-radius: 35px; border: solid 4px transparent}
+    75% {   border-radius: 15px; border: solid 4px rgb(0, 73, 209);}
+    100%{  border-radius: 10px; border: solid  4px rgba(0, 57, 149, 0.5);}
+}

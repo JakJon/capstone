@@ -16,13 +16,15 @@ import {MatInputModule} from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { CompositionComponent } from './composition/composition.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PostComponent,
     UrlSanitizerPipe,
-    CompositionComponent
+    CompositionComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
