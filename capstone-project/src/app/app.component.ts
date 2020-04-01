@@ -17,7 +17,8 @@ import { PostService } from './services/post.service';
       <button class="fab" *ngIf="mobile && signedIn" mat-fab color="primary" (click)="createPost()">+</button>
       <app-login 
         *ngIf="showLoginWindow"
-        (cancelLogin)="onCancelLogin()">
+        (cancelLogin)="onCancelLogin()"
+        (submitLogin)="onSubmitLogin()">
       </app-login>
       <app-composition 
         (cancel)="onCancel($event)"
@@ -88,6 +89,11 @@ export class AppComponent implements OnInit {
 
   onCancelLogin() {
     this.toggleLoginWindow();
+  }
+
+  onSubmitLogin() {
+    this.toggleLoginWindow();
+    
   }
 
   createPost() {
