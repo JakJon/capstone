@@ -9,14 +9,17 @@ import { PostService } from './services/post.service';
       <mat-toolbar>
         <div class="left">
           <i class="fas fa-user"></i>
-          <h2 class="username" *ngIf="!signedIn">{{username}}</h2>
+          <button (click)="showMyProfile()" mat-button color="primary" *ngIf="signedIn">{{username}}</button>
         </div>
         <div class="center">
             <i class="logo"></i>
             <h1 class="title">Sound Share</h1>
             <button *ngIf="!mobile && signedIn" mat-button color="primary" (click)="createPost()">Create Post</button>
             <button *ngIf="!signedIn && !showLoginWindow" mat-button color="primary" (click)="toggleLoginWindow()">Sign In</button>
-        </div>      
+        </div>    
+        <div class="right">
+          <button (click)="logout()" mat-button color="primary" *ngIf="signedIn">Sign Out</button>
+        </div>  
       </mat-toolbar>
       <button class="fab" *ngIf="mobile && signedIn" mat-fab color="primary" (click)="createPost()">+</button>
       <app-login 
@@ -30,15 +33,23 @@ import { PostService } from './services/post.service';
         id="composition" 
         *ngIf="creatingPost">
       </app-composition>
-      <app-post *ngFor="let p of postFeed"
-          [id]="p.id" 
-          [user]="p.user"
-          [songName]="p.songTitle" 
-          [songArtist]="p.songArtist" 
-          [songURL]="p.songUrl"
-          [songDescription]="p.description" 
-          (delete)="onDeletePost()"
-          >
+      <app-profile
+        *ngIf="showProfile"
+        [username]="profileName"
+        (closeProfile)="onCloseProfile()"
+        >
+      </app-profile> 
+      <app-post *ngFor="let p of currentPostFeed"
+        [id]="p.id" 
+        [user]="p.user"
+        [songName]="p.songTitle" 
+        [songArtist]="p.songArtist" 
+        [songURL]="p.songUrl"
+        [songDescription]="p.description"
+        [username]="this.username" 
+        (delete)="onDeletePost()"
+        (showPostProfile)="showPosterProfile($event)"
+        >
       </app-post>
     </div>
     `,
@@ -49,10 +60,13 @@ export class AppComponent implements OnInit {
   creatingPost: boolean = false;
   mobile: boolean;
   signedIn = false;
+  showProfile = false;
   showLoginWindow = false;
   error = false;
-  postFeed: Post[] = [];
+  currentPostFeed: Post[] = [];
+  originalPostFeed: Post[] = [];
   username: string;
+  profileName: String;
   constructor(private postService: PostService) {
   }
 
@@ -73,12 +87,48 @@ export class AppComponent implements OnInit {
   loadPosts() {
     this.postService.getPosts()
       .subscribe(posts => {
-        this.postFeed = posts
+        this.currentPostFeed = posts;
+        this.originalPostFeed = posts;
         });
   }
 
+  showMyProfile(){
+    this.showProfile = true;
+    this.profileName = this.username;
+    this.currentPostFeed = [];
+
+    for (let p of this.originalPostFeed)
+    {
+      if (p.user === this.username) {
+        this.currentPostFeed.push(p);
+      }  
+    }
+    
+  }
+
+  showPosterProfile(u: string) {
+    this.showProfile = true;
+    this.profileName = u;
+    this.currentPostFeed = [];
+
+    for (let p of this.originalPostFeed)
+    {
+      if (p.user === u) {
+        this.currentPostFeed.push(p);
+      }  
+    }
+  }
+
+  logout() {
+    document.location.reload();
+
+    //TODO: Do this when cahcing user session
+    // this.signedIn = false;
+    // this.username = "";
+  }
+
   onCreatePost(post: Post) {
-      this.postFeed.unshift(post);
+      this.currentPostFeed.unshift(post);
       this.creatingPost = false;
   }
 
@@ -92,14 +142,19 @@ export class AppComponent implements OnInit {
     }
   }
 
+  onCloseProfile() {
+    this.showProfile = false;
+    this.currentPostFeed = this.originalPostFeed;
+  }
+
   onCancelLogin() {
     this.toggleLoginWindow();
   }
 
   onSubmitLogin(credentials: string) {
     this.toggleLoginWindow();
-    console.log(`hit ${credentials}`);
     this.username = credentials;
+    this.signedIn = true;
   }
 
   createPost() {

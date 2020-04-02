@@ -43,13 +43,13 @@ export class LoginComponent {
   submit() {
     if (this.validCredentials())
     {
-      this.submitLogin.emit("Jake Jones");
+      this.submitLogin.emit("Jake");
     } else {
     }
   }
 
   validCredentials(): boolean {
-    if ((<HTMLInputElement>document.getElementById("username")).value.toUpperCase() === "JAKE JONES") {
+    if ((<HTMLInputElement>document.getElementById("username")).value.toUpperCase() === "JAKE") {
       return true;
     }
     else { 
