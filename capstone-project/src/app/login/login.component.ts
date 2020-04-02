@@ -44,9 +44,7 @@ export class LoginComponent {
     if (this.validCredentials())
     {
       this.submitLogin.emit("Jake Jones");
-      console.log("hit");
     } else {
-      console.log("miss");
     }
   }
 

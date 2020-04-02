@@ -7,18 +7,22 @@ import { PostService } from './services/post.service';
   template: `
     <div class="mainContainer">
       <mat-toolbar>
-          <div class="header">
-              <i class="logo"></i>
-              <h1 class="title">Sound Share</h1>
-              <button *ngIf="!mobile && signedIn" mat-button color="primary" (click)="createPost()">Create Post</button>
-              <button *ngIf="!signedIn && !showLoginWindow" mat-button color="primary" (click)="toggleLoginWindow()">Sign In</button>
-          </div>      
+        <div class="left">
+          <i class="fas fa-user"></i>
+          <h2 class="username" *ngIf="!signedIn">{{username}}</h2>
+        </div>
+        <div class="center">
+            <i class="logo"></i>
+            <h1 class="title">Sound Share</h1>
+            <button *ngIf="!mobile && signedIn" mat-button color="primary" (click)="createPost()">Create Post</button>
+            <button *ngIf="!signedIn && !showLoginWindow" mat-button color="primary" (click)="toggleLoginWindow()">Sign In</button>
+        </div>      
       </mat-toolbar>
       <button class="fab" *ngIf="mobile && signedIn" mat-fab color="primary" (click)="createPost()">+</button>
       <app-login 
         *ngIf="showLoginWindow"
         (cancelLogin)="onCancelLogin()"
-        (submitLogin)="onSubmitLogin()">
+        (submitLogin)="onSubmitLogin($event)">
       </app-login>
       <app-composition 
         (cancel)="onCancel($event)"
@@ -48,6 +52,7 @@ export class AppComponent implements OnInit {
   showLoginWindow = false;
   error = false;
   postFeed: Post[] = [];
+  username: string;
   constructor(private postService: PostService) {
   }
 
@@ -91,9 +96,10 @@ export class AppComponent implements OnInit {
     this.toggleLoginWindow();
   }
 
-  onSubmitLogin() {
+  onSubmitLogin(credentials: string) {
     this.toggleLoginWindow();
-    
+    console.log(`hit ${credentials}`);
+    this.username = credentials;
   }
 
   createPost() {
