@@ -7,9 +7,9 @@ import { PostService } from './services/post.service';
   template: `
     <div class="mainContainer">
       <mat-toolbar>
-        <div class="left">
-          <i class="fas fa-user"></i>
-          <button (click)="showMyProfile()" mat-button color="primary" *ngIf="signedIn">{{username}}</button>
+        <div (click)="showMyProfile()" class="left">
+          <mat-icon *ngIf="signedIn" color="primary">face</mat-icon>
+          <button mat-button color="primary" class="profile-button" *ngIf="signedIn">{{username}}</button>
         </div>
         <div class="center">
             <i class="logo"></i>
