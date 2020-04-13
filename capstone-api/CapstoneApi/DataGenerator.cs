@@ -25,10 +25,18 @@ public class DataGenerator
                 return;
             }
 
+        context.UserModels.AddRange(
+            new UserModel{
+                Id = 1,
+                Name = "Jake",
+                Biography = "Example BIO"
+            }
+        );
+
         context.PostModels.AddRange(
             new PostModel{
                 Id = 1,
-                User = "Music Dude",
+                UserID = 1,
                 SongTitle="Three Thirty",
                 SongArtist="Reaper",
                 SongUrl="https://www.youtube.com/embed/BEKTloAExfs?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=165",
@@ -36,7 +44,7 @@ public class DataGenerator
             },
             new PostModel{
                 Id = 2,
-                User = "Jake",
+                UserID = 1,
                 SongTitle="Stand Tall",
                 SongArtist="Childish Gambino",
                 SongUrl="https://www.youtube.com/embed/WbsZnsr0lI4?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=292",
@@ -44,7 +52,7 @@ public class DataGenerator
             },
             new PostModel{
                 Id = 3,
-                User = "Alien",
+                UserID = 1,
                 SongTitle="Lucid",
                 SongArtist="4b Ft. Austin Mahone & Abraham Mateo",
                 SongUrl="https://www.youtube.com/embed/Wsmr3UcxTz8?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=141&end=173",
@@ -52,15 +60,15 @@ public class DataGenerator
             },
             new PostModel{
                 Id = 4,
-                User = "Daryl",
+                UserID = 1,
                 SongTitle="skip",
                 SongArtist="Superparka",
                 SongUrl="https://www.youtube.com/embed/4N4j7dNB4q4?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=46&end=67",
                 Description="This post has a specified end time."
             },
-                        new PostModel{
+            new PostModel{
                 Id = 5,
-                User = "Jake",
+                UserID = 1,
                 SongTitle="100 Percent Chance of Showers",
                 SongArtist="The Audiots",
                 SongUrl="https://www.youtube.com/embed/_YVe16Sb0LQ?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=51&end=155",
@@ -68,11 +76,12 @@ public class DataGenerator
             },
                         new PostModel{
                 Id = 6,
-                User = "Alien",
+                UserID = 1,
                 SongTitle="Naked",
                 SongArtist="Bickle",
                 SongUrl="https://www.youtube.com/embed/A-io6KSX4_c?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=159",
                 Description="Crazy futuristic funky disco dance music 🕺 🌝"
+<<<<<<< HEAD
             },
                                     new PostModel{
                 Id = 7,
@@ -159,6 +168,16 @@ public class DataGenerator
                 SongArtist="Plume",
                 SongUrl="https://www.youtube.com/embed/k0k3EN9T3i0?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=18",
                 Description="Chill electronic synth waves 🏄‍♂️"
+=======
+                        },
+            new PostModel{
+                Id = 7,
+                UserID = 1,
+                SongTitle="You know you're not alright",
+                SongArtist="nicholas Franchise",
+                SongUrl="https://www.youtube.com/embed/1kChMtdiN7U?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=162",
+                Description="Upbeat Indie Rock"
+>>>>>>> WIP FK
             }
 
         );
