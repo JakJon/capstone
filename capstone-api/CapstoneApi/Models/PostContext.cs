@@ -9,5 +9,6 @@ namespace CapstoneApi.Models
             {  }
 
         public DbSet<PostModel> PostModels { get; set; }
+        public DbSet<UserModel> UserModels { get; set; }
     }
 }
