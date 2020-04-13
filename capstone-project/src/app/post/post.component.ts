@@ -13,7 +13,6 @@ import { Post } from '../models/post.interface';
           <iframe [id]="this.idString" class="song" width="300" height="100" [src]="songURL | urlSanitizer" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div class="titleText">
-          <!--<button class="replay-button" *ngIf="!editMode" mat-mini-fab color="primary" (click)="refreshFrame()">O</button>-->
           <button class="replay-button" *ngIf="!editMode" mat-icon-button color="primary" (click)="refreshFrame()">
             <mat-icon>refresh</mat-icon>
           </button>
@@ -38,10 +37,10 @@ import { Post } from '../models/post.interface';
       <mat-divider [vertical]="true"></mat-divider>
       <div class="rightSide">
         <div class="post-header">
-          <p class="userText">Posted By: {{user}}</p>
+          <p (click)="showPosterProfile()" class="user-name">{{user}}</p>
           <div class="post-buttons">
-            <button *ngIf="!editMode" mat-button color="warn" (click)="deletePost(id)">Delete</button>
-            <button *ngIf="!editMode" mat-button color="primary" (click)="editPost()">Edit</button>
+            <button *ngIf="!editMode && isUserPost" mat-button color="warn" (click)="deletePost(id)">Delete</button>
+            <button *ngIf="!editMode && isUserPost" mat-button color="primary" (click)="editPost()">Edit</button>
             <button *ngIf="editMode" mat-button color="warn" (click)="editDone(false)">Cancel</button>
             <button [disabled]="!doneEditing" *ngIf="editMode" mat-button color="primary" (click)="editDone(true)">Done</button>
           </div>
@@ -64,16 +63,18 @@ export class PostComponent implements OnInit {
 
   @Input() id: number;
   @Input() user: string;
+  @Input() username: string;
   @Input() songURL: string;
   @Input() songName: string;
   @Input() songArtist: string;
   @Input() songDescription: string;
   @Output() delete = new EventEmitter();
+  @Output() showPostProfile = new EventEmitter<string>();
 
   public editMode = false;
   public doneEditing = false;
+  public isUserPost = false;
   public idString: string;
-
 
   constructor(private postService: PostService) { }
 
@@ -83,6 +84,15 @@ export class PostComponent implements OnInit {
 
   ngDoCheck(): void {
     this.doneEditing = this.validateInputs();
+
+    if (this.user === this.username){
+      console.log("hit");
+      this.isUserPost = true;
+    }
+  }
+
+  showPosterProfile() {
+    this.showPostProfile.emit(this.user);
   }
 
   deletePost(id: number) {

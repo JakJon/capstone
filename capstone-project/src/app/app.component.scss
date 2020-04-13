@@ -5,11 +5,16 @@
   height: 100%;
 }
 
-.header {
+.center {
   display: flex;
   flex-direction: row;
   margin: 0 auto;
   align-items: center;
+}
+
+.clickable-text{
+  color:#3f51b5;
+  cursor: pointer;
 }
 
 .fab {
