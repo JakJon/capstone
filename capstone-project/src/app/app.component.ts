@@ -18,6 +18,7 @@ import { PostService } from './services/post.service';
             <button *ngIf="!signedIn && !showLoginWindow" mat-button color="primary" (click)="toggleLoginWindow()">Sign In</button>
         </div>    
         <div class="right">
+          <mat-icon (click)="toggleFilter()" color="primary">filter_list</mat-icon>
           <button (click)="logout()" mat-button color="primary" *ngIf="signedIn">Sign Out</button>
         </div>  
       </mat-toolbar>
@@ -33,6 +34,8 @@ import { PostService } from './services/post.service';
         id="composition" 
         *ngIf="creatingPost">
       </app-composition>
+      <app-filter *ngIf="filtering">
+      </app-filter>
       <app-profile
         *ngIf="showProfile"
         [username]="profileName"
@@ -62,6 +65,7 @@ export class AppComponent implements OnInit {
   signedIn = false;
   showProfile = false;
   showLoginWindow = false;
+  filtering: boolean = false;
   error = false;
   currentPostFeed: Post[] = [];
   originalPostFeed: Post[] = [];
@@ -104,6 +108,10 @@ export class AppComponent implements OnInit {
       }  
     }
     
+  }
+
+  toggleFilter() {
+    this.filtering = !this.filtering;
   }
 
   showPosterProfile(u: string) {

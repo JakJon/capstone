@@ -18,6 +18,8 @@ import { CompositionComponent } from './composition/composition.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
+import { FilterComponent } from './filter/filter.component';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { ProfileComponent } from './profile/profile.component';
     UrlSanitizerPipe,
     CompositionComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +44,7 @@ import { ProfileComponent } from './profile/profile.component';
     MatToolbarModule,
     MatDividerModule,
     MatIconModule,
+    MatRadioModule,
     MatButtonModule,
     MatInputModule
   ],
