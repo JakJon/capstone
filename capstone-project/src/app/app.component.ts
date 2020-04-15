@@ -7,18 +7,21 @@ import { PostService } from './services/post.service';
   template: `
     <div class="mainContainer">
       <mat-toolbar>
-        <div (click)="showMyProfile()" class="left">
-          <mat-icon *ngIf="signedIn" color="primary">face</mat-icon>
-          <button mat-button color="primary" class="profile-button" *ngIf="signedIn">{{username}}</button>
+        <div class="left">
+          <button *ngIf="!signedIn && !showLoginWindow" mat-button color="primary" (click)="toggleLoginWindow()">Sign In</button>
+          <div class="profile-section" (click)="showMyProfile()">
+            <mat-icon *ngIf="signedIn" color="primary">face</mat-icon>
+            <button mat-button color="primary" class="profile-button" *ngIf="signedIn">{{username}}</button>
+          </div>
         </div>
         <div class="center">
             <i class="logo"></i>
             <h1 class="title">Sound Share</h1>
-            <button *ngIf="!mobile && signedIn" mat-button color="primary" (click)="createPost()">Create Post</button>
-            <button *ngIf="!signedIn && !showLoginWindow" mat-button color="primary" (click)="toggleLoginWindow()">Sign In</button>
+            <button *ngIf="!mobile && signedIn" mat-flat-button color="primary" (click)="createPost()">Create Post</button>
         </div>    
         <div class="right">
-          <mat-icon (click)="toggleFilter()" color="primary">filter_list</mat-icon>
+          <mat-icon (click)="toggleFilter()" color="primary">search</mat-icon>
+          <button (click)="toggleFilter()" class="search-button" mat-button color="primary">Search</button>
           <button (click)="logout()" mat-button color="primary" *ngIf="signedIn">Sign Out</button>
         </div>  
       </mat-toolbar>
@@ -36,9 +39,12 @@ import { PostService } from './services/post.service';
       </app-composition>
       <app-filter 
       *ngIf="filtering"
+      [selectedMatchType]="filteringMatchType"
+      [selectedOption]="filteringType"
       (cancelFilter)="onCancelFilter()"
       (submitFilter)="onSubmitFilter($event)"
       (filterType)="saveFilterType($event)"
+      (filterMatchType)="saveFilterMatchType($event)"
       >
       </app-filter>
       <app-profile
@@ -76,7 +82,8 @@ export class AppComponent implements OnInit {
   originalPostFeed: Post[] = [];
   username: string;
   profileName: String;
-  filteringType: string;
+  filteringType = "Song Title";
+  filteringMatchType = "Exact Match";
 
   constructor(private postService: PostService) {
   }
@@ -137,26 +144,55 @@ export class AppComponent implements OnInit {
   createFiler(type: string, term: string) {
     this.currentPostFeed = [];
 
+    //TODO: Clean up this mess, probably should be in the api logic
+
     if (type === "Username") {
-      for (let post of this.originalPostFeed)
-      {
-        if (post.user === term) {
-          this.currentPostFeed.push(post);
-        }  
+      if (this.filteringMatchType === "Exact Match") {
+        for (let post of this.originalPostFeed)
+        {
+          if (post.user === term) {
+            this.currentPostFeed.push(post);
+          }  
+        }
+      } else if (this.filteringMatchType === "Contains") {
+        for (let post of this.originalPostFeed)
+        {
+          if (post.user.includes(term)) {
+            this.currentPostFeed.push(post);
+          }  
+        }
       }
     } else if (type === "Song Title") {
-      for (let post of this.originalPostFeed)
-      {
-        if (post.songTitle === term) {
-          this.currentPostFeed.push(post);
-        }  
+      if (this.filteringMatchType === "Exact Match") {
+        for (let post of this.originalPostFeed)
+        {
+          if (post.songTitle === term) {
+            this.currentPostFeed.push(post);
+          }  
+        }
+      } else if (this.filteringMatchType === "Contains") {
+        for (let post of this.originalPostFeed)
+        {
+          if (post.songTitle.includes(term)) {
+            this.currentPostFeed.push(post);
+          }  
+        }
       }
     } else if (type === "Song Artist") {
-      for (let post of this.originalPostFeed)
-      {
-        if (post.songArtist === term) {
-          this.currentPostFeed.push(post);
-        }  
+      if (this.filteringMatchType === "Exact Match") {
+        for (let post of this.originalPostFeed)
+        {
+          if (post.songArtist === term) {
+            this.currentPostFeed.push(post);
+          }  
+        }
+      } else if (this.filteringMatchType === "Contains") {
+        for (let post of this.originalPostFeed)
+        {
+          if (post.songArtist.includes(term)) {
+            this.currentPostFeed.push(post);
+          }  
+        }
       }
     }
   }
@@ -191,10 +227,12 @@ export class AppComponent implements OnInit {
 
   onCancelLogin() {
     this.toggleLoginWindow();
+    this.currentPostFeed = this.originalPostFeed;
   }
 
   onCancelFilter() {
     this.filtering = false;
+    this.currentPostFeed = this.originalPostFeed;
   }
 
   onSubmitLogin(credentials: string) {
@@ -213,5 +251,9 @@ export class AppComponent implements OnInit {
 
   saveFilterType(type: string) {
     this.filteringType = type;
+  }
+
+  saveFilterMatchType(matchType: string) {
+    this.filteringMatchType = matchType;
   }
 }

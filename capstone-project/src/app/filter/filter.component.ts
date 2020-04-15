@@ -1,33 +1,47 @@
-import { Component, OnInit, DoCheck, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, DoCheck, Output, EventEmitter, Input } from "@angular/core";
 import { Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: "app-filter",
   template: `
     <mat-card>
-      <mat-radio-group class="radio-group" color="primary" [(ngModel)]="selectedOption">
-        <mat-radio-button
-          class="radio-button"
-          *ngFor="let option of options"
-          [value]="option"
-        >
-          {{ option }}
-        </mat-radio-button>
-      </mat-radio-group>
+      <div class="radio-buttons">
+        <div>
+        <mat-radio-group class="radio-group" color="primary" [(ngModel)]="selectedOption">
+          <mat-radio-button
+            class="radio-button"
+            *ngFor="let option of options"
+            [value]="option"
+          >
+            {{ option }}
+          </mat-radio-button>
+        </mat-radio-group>
+        </div>
+        <div>
+        <mat-radio-group class="radio-group" color="primary" [(ngModel)]="selectedMatchType">
+          <mat-radio-button
+            class="radio-button"
+            *ngFor="let matchType of matchTypes"
+            [value]="matchType"
+          >
+            {{ matchType }}
+          </mat-radio-button>
+        </mat-radio-group>
+        </div>
+      </div>
 
       <div class="search-phrase">
-        <h3 *ngIf="searchTypeSelected">Search for posts with a <span class="search-type">{{selectedOption}}</span> that contains</h3>
-        <h3 *ngIf="!searchTypeSelected">Choose a search type</h3>
+        <h3 >Search for posts with {{prefaceWord}} <span class="search-type">{{selectedOption}}</span>{{matchTypePhrase}}</h3>
 
-        <mat-form-field class="search-input" *ngIf="searchTypeSelected">
-          <input id="filter" matInput [formControl]="searchControl">
+        <mat-form-field class="search-input">
+          <input id="filter" matInput value="bob" [formControl]="searchControl">
           <mat-error *ngIf="searchControl.hasError('required')">
             A search value is <strong>required</strong>
           </mat-error>
         </mat-form-field>
       </div>
       <div class="buttons">
-        <button mat-button color="primary" (click)="filter()">Search</button>
+        <button mat-button color="primary" [disabled]="!validateInputs()" (click)="filter()">Search</button>
         <button mat-button color="warn" (click)="cancel()">Cancel</button>
       </div>
     </mat-card>
@@ -36,22 +50,31 @@ import { Validators, FormControl } from '@angular/forms';
 })
 export class FilterComponent implements OnInit {
   options: string[] = ["Song Title", "Song Artist", "Username"];
+  matchTypes: string[] = ["Exact Match", "Contains"];
+  matchTypePhrase: string;
   filterTerm: string;
-  selectedOption: string;
-  searchTypeSelected = false;
-  public checked = false;
+
+  @Input() selectedMatchType: string;
+  @Input() selectedOption: string;
 
   @Output() cancelFilter = new EventEmitter();
   @Output() submitFilter = new EventEmitter<String>();
   @Output() filterType = new EventEmitter<String>();
+  @Output() filterMatchType = new EventEmitter<String>();
+  prefaceWord: string;
 
   constructor() {}
 
   ngOnInit(): void {}
 
   ngDoCheck(): void {
-    if (this.selectedOption) {
-      this.searchTypeSelected = true;
+    if (this.selectedMatchType === "Exact Match")
+    {
+      this.prefaceWord = "the";
+      this.matchTypePhrase = ":";
+    } else if (this.selectedMatchType === "Contains") {
+      this.prefaceWord = "a";
+      this.matchTypePhrase = " that contains:";
     }
   }
 
@@ -60,6 +83,7 @@ export class FilterComponent implements OnInit {
     {
       this.filterTerm = (<HTMLInputElement>document.getElementById("filter")).value;
       this.filterType.emit(this.selectedOption);
+      this.filterMatchType.emit(this.selectedMatchType);
       this.submitFilter.emit(this.filterTerm);
     } else {
       //TODO: handle this else case
