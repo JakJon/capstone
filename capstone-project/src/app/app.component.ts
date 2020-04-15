@@ -7,17 +7,21 @@ import { PostService } from './services/post.service';
   template: `
     <div class="mainContainer">
       <mat-toolbar>
-        <div (click)="showMyProfile()" class="left">
-          <mat-icon *ngIf="signedIn" color="primary">face</mat-icon>
-          <button mat-button color="primary" class="profile-button" *ngIf="signedIn">{{username}}</button>
+        <div class="left">
+          <button *ngIf="!signedIn && !showLoginWindow" mat-button color="primary" (click)="toggleLoginWindow()">Sign In</button>
+          <div class="profile-section" (click)="showMyProfile()">
+            <mat-icon *ngIf="signedIn" color="primary">face</mat-icon>
+            <button mat-button color="primary" class="profile-button" *ngIf="signedIn">{{username}}</button>
+          </div>
         </div>
         <div class="center">
             <i class="logo"></i>
             <h1 class="title">Sound Share</h1>
-            <button *ngIf="!mobile && signedIn" mat-button color="primary" (click)="createPost()">Create Post</button>
-            <button *ngIf="!signedIn && !showLoginWindow" mat-button color="primary" (click)="toggleLoginWindow()">Sign In</button>
+            <button *ngIf="!mobile && signedIn" mat-flat-button color="primary" (click)="createPost()">Create Post</button>
         </div>    
         <div class="right">
+          <mat-icon (click)="toggleFilter()" color="primary">search</mat-icon>
+          <button (click)="toggleFilter()" class="search-button" mat-button color="primary">Search</button>
           <button (click)="logout()" mat-button color="primary" *ngIf="signedIn">Sign Out</button>
         </div>  
       </mat-toolbar>
@@ -28,11 +32,21 @@ import { PostService } from './services/post.service';
         (submitLogin)="onSubmitLogin($event)">
       </app-login>
       <app-composition 
-        (cancel)="onCancel($event)"
+        (cancel)="onCancelComposition($event)"
         (newPost)="onCreatePost($event)"
         id="composition" 
         *ngIf="creatingPost">
       </app-composition>
+      <app-filter 
+      *ngIf="filtering"
+      [selectedMatchType]="filteringMatchType"
+      [selectedOption]="filteringType"
+      (cancelFilter)="onCancelFilter()"
+      (submitFilter)="onSubmitFilter($event)"
+      (filterType)="saveFilterType($event)"
+      (filterMatchType)="saveFilterMatchType($event)"
+      >
+      </app-filter>
       <app-profile
         *ngIf="showProfile"
         [username]="profileName"
@@ -62,11 +76,15 @@ export class AppComponent implements OnInit {
   signedIn = false;
   showProfile = false;
   showLoginWindow = false;
+  filtering: boolean = false;
   error = false;
   currentPostFeed: Post[] = [];
   originalPostFeed: Post[] = [];
   username: string;
   profileName: String;
+  filteringType = "Song Title";
+  filteringMatchType = "Exact Match";
+
   constructor(private postService: PostService) {
   }
 
@@ -106,16 +124,76 @@ export class AppComponent implements OnInit {
     
   }
 
-  showPosterProfile(u: string) {
+  toggleFilter() {
+    this.filtering = !this.filtering;
+  }
+
+  showPosterProfile(user: string) {
     this.showProfile = true;
-    this.profileName = u;
+    this.profileName = user;
     this.currentPostFeed = [];
 
-    for (let p of this.originalPostFeed)
+    for (let post of this.originalPostFeed)
     {
-      if (p.user === u) {
-        this.currentPostFeed.push(p);
+      if (post.user === user) {
+        this.currentPostFeed.push(post);
       }  
+    }
+  }
+
+  createFiler(type: string, term: string) {
+    this.currentPostFeed = [];
+
+    //TODO: Clean up this mess, probably should be in the api logic
+
+    if (type === "Username") {
+      if (this.filteringMatchType === "Exact Match") {
+        for (let post of this.originalPostFeed)
+        {
+          if (post.user === term) {
+            this.currentPostFeed.push(post);
+          }  
+        }
+      } else if (this.filteringMatchType === "Contains") {
+        for (let post of this.originalPostFeed)
+        {
+          if (post.user.includes(term)) {
+            this.currentPostFeed.push(post);
+          }  
+        }
+      }
+    } else if (type === "Song Title") {
+      if (this.filteringMatchType === "Exact Match") {
+        for (let post of this.originalPostFeed)
+        {
+          if (post.songTitle === term) {
+            this.currentPostFeed.push(post);
+          }  
+        }
+      } else if (this.filteringMatchType === "Contains") {
+        for (let post of this.originalPostFeed)
+        {
+          if (post.songTitle.includes(term)) {
+            this.currentPostFeed.push(post);
+          }  
+        }
+      }
+    } else if (type === "Song Artist") {
+      if (this.filteringMatchType === "Exact Match") {
+        for (let post of this.originalPostFeed)
+        {
+          if (post.songArtist === term) {
+            this.currentPostFeed.push(post);
+          }  
+        }
+      } else if (this.filteringMatchType === "Contains") {
+        for (let post of this.originalPostFeed)
+        {
+          if (post.songArtist.includes(term)) {
+            this.currentPostFeed.push(post);
+          }  
+        }
+      }
     }
   }
 
@@ -136,7 +214,7 @@ export class AppComponent implements OnInit {
     window.location.reload();
   }
 
-  onCancel(cancel: boolean) {
+  onCancelComposition(cancel: boolean) {
     if (cancel) {
       this.creatingPost = false;
     }
@@ -149,6 +227,12 @@ export class AppComponent implements OnInit {
 
   onCancelLogin() {
     this.toggleLoginWindow();
+    this.currentPostFeed = this.originalPostFeed;
+  }
+
+  onCancelFilter() {
+    this.filtering = false;
+    this.currentPostFeed = this.originalPostFeed;
   }
 
   onSubmitLogin(credentials: string) {
@@ -157,7 +241,19 @@ export class AppComponent implements OnInit {
     this.signedIn = true;
   }
 
+  onSubmitFilter(filterTerm: string) {
+    this.createFiler(this.filteringType, filterTerm)
+  }
+
   createPost() {
     this.creatingPost = true;
+  }
+
+  saveFilterType(type: string) {
+    this.filteringType = type;
+  }
+
+  saveFilterMatchType(matchType: string) {
+    this.filteringMatchType = matchType;
   }
 }

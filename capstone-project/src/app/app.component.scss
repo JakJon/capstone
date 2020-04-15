@@ -17,6 +17,11 @@
   cursor: pointer;
 }
 
+.profile-section {
+  display: flex;
+  align-items: center;
+}
+
 .fab {
   position: fixed;
   z-index: 2;
@@ -51,14 +56,14 @@ mat-icon {
   cursor: pointer;
 }
 
-.left {
-  display: flex;
-  align-items: center;
+.search-button, .profile-button{
+  margin: auto 0;
+  padding-left: 4px;
 }
 
-.profile-button {
-  margin: 0;
-  padding: auto, 4px;
+.left, .right{
+  display: flex;
+  align-items: center;
 }
 
 app-post {
