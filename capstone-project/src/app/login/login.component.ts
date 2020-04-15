@@ -33,6 +33,7 @@ export class LoginComponent {
 
   @Output() cancelLogin = new EventEmitter();
   @Output() submitLogin = new EventEmitter<String>();
+  username: string;
 
   constructor() { }
 
@@ -43,13 +44,16 @@ export class LoginComponent {
   submit() {
     if (this.validCredentials())
     {
-      this.submitLogin.emit("Jake");
+      this.submitLogin.emit(this.username);
     } else {
+      //TODO: handle this else case
     }
   }
 
   validCredentials(): boolean {
-    if ((<HTMLInputElement>document.getElementById("username")).value.toUpperCase() === "JAKE") {
+    this.username = (<HTMLInputElement>document.getElementById("username")).value;
+
+    if (this.username) {
       return true;
     }
     else { 

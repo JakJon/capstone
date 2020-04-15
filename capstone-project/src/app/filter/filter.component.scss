@@ -5,7 +5,7 @@ mat-card {
   width: 75%;
 
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-around;
 
   animation: blinking-fade 3.5s infinite;
@@ -31,18 +31,22 @@ mat-card {
   }
 }
 
-.filter-options {
-    display: flex;
-}
-
-.radio-group,
-.checkboxes {
+.search-phrase, .buttons {
   display: flex;
-  flex-direction: column;
-  margin: 15px 0;
+  align-items: center;
 }
 
-.radio-button,
-mat-checkbox {
+.search-type {
+  color: #3f51b5;
+}
+
+mat-form-field {
+  margin: auto 8px;
+  font-weight: 600;
+  font-size: 20px;
+  color: #3f51b5;
+}
+
+.radio-button {
   margin: 5px;
 }

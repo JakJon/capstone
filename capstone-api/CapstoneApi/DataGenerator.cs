@@ -65,7 +65,16 @@ public class DataGenerator
                 SongArtist="The Audiots",
                 SongUrl="https://www.youtube.com/embed/_YVe16Sb0LQ?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=51&end=155",
                 Description="Underground Garage Rock 🎸"
+            },
+                        new PostModel{
+                Id = 6,
+                User = "Alien",
+                SongTitle="Naked",
+                SongArtist="Bickle",
+                SongUrl="https://www.youtube.com/embed/A-io6KSX4_c?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=159",
+                Description="Crazy futuristic funky disco dance music 🕺 🌝"
             }
+
 
         );
 

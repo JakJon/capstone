@@ -29,12 +29,17 @@ import { PostService } from './services/post.service';
         (submitLogin)="onSubmitLogin($event)">
       </app-login>
       <app-composition 
-        (cancel)="onCancel($event)"
+        (cancel)="onCancelComposition($event)"
         (newPost)="onCreatePost($event)"
         id="composition" 
         *ngIf="creatingPost">
       </app-composition>
-      <app-filter *ngIf="filtering">
+      <app-filter 
+      *ngIf="filtering"
+      (cancelFilter)="onCancelFilter()"
+      (submitFilter)="onSubmitFilter($event)"
+      (filterType)="saveFilterType($event)"
+      >
       </app-filter>
       <app-profile
         *ngIf="showProfile"
@@ -71,6 +76,8 @@ export class AppComponent implements OnInit {
   originalPostFeed: Post[] = [];
   username: string;
   profileName: String;
+  filteringType: string;
+
   constructor(private postService: PostService) {
   }
 
@@ -114,16 +121,43 @@ export class AppComponent implements OnInit {
     this.filtering = !this.filtering;
   }
 
-  showPosterProfile(u: string) {
+  showPosterProfile(user: string) {
     this.showProfile = true;
-    this.profileName = u;
+    this.profileName = user;
     this.currentPostFeed = [];
 
-    for (let p of this.originalPostFeed)
+    for (let post of this.originalPostFeed)
     {
-      if (p.user === u) {
-        this.currentPostFeed.push(p);
+      if (post.user === user) {
+        this.currentPostFeed.push(post);
       }  
+    }
+  }
+
+  createFiler(type: string, term: string) {
+    this.currentPostFeed = [];
+
+    if (type === "Username") {
+      for (let post of this.originalPostFeed)
+      {
+        if (post.user === term) {
+          this.currentPostFeed.push(post);
+        }  
+      }
+    } else if (type === "Song Title") {
+      for (let post of this.originalPostFeed)
+      {
+        if (post.songTitle === term) {
+          this.currentPostFeed.push(post);
+        }  
+      }
+    } else if (type === "Song Artist") {
+      for (let post of this.originalPostFeed)
+      {
+        if (post.songArtist === term) {
+          this.currentPostFeed.push(post);
+        }  
+      }
     }
   }
 
@@ -144,7 +178,7 @@ export class AppComponent implements OnInit {
     window.location.reload();
   }
 
-  onCancel(cancel: boolean) {
+  onCancelComposition(cancel: boolean) {
     if (cancel) {
       this.creatingPost = false;
     }
@@ -159,13 +193,25 @@ export class AppComponent implements OnInit {
     this.toggleLoginWindow();
   }
 
+  onCancelFilter() {
+    this.filtering = false;
+  }
+
   onSubmitLogin(credentials: string) {
     this.toggleLoginWindow();
     this.username = credentials;
     this.signedIn = true;
   }
 
+  onSubmitFilter(filterTerm: string) {
+    this.createFiler(this.filteringType, filterTerm)
+  }
+
   createPost() {
     this.creatingPost = true;
+  }
+
+  saveFilterType(type: string) {
+    this.filteringType = type;
   }
 }
