@@ -49,7 +49,7 @@ namespace CapstoneApi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUserModel(long id, UserModel UserModel)
         {
-            if (id != UserModel.Id)
+            if (id != UserModel.UserId)
             {
                 return BadRequest();
             }
@@ -84,7 +84,7 @@ namespace CapstoneApi.Controllers
             _context.UserModels.Add(UserModel);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetUserModel), new { id = UserModel.Id }, UserModel);
+            return CreatedAtAction(nameof(GetUserModel), new { id = UserModel.UserId }, UserModel);
         }
 
         // DELETE: api/User/5
@@ -105,7 +105,7 @@ namespace CapstoneApi.Controllers
 
         private bool UserModelExists(long id)
         {
-            return _context.UserModels.Any(e => e.Id == id);
+            return _context.UserModels.Any(e => e.UserId == id);
         }
     }
 }

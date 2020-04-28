@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Post } from '../models/post.interface';
 import { Observable } from 'rxjs';
+import { User } from '../models/user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ import { Observable } from 'rxjs';
 export class PostService {
 
   postsUrl = "https://localhost:5001/api/Post";
+  userUrl = "https://localhost:5001/api/User";
 
   constructor(private http: HttpClient) { }
 
@@ -33,5 +35,14 @@ export class PostService {
   getSingularPost(id: number): Observable<Post> {
     const URL = `https://localhost:5001/api/Post/${id}`;
     return this.http.get<Post>(URL);
+  }
+
+  getUser(id: number): Observable<User> {
+    const URL = `https://localhost:5001/api/User/${id}`;
+    return this.http.get<User>(URL);
+  }
+
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.userUrl);
   }
 }

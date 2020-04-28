@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Validators, FormControl } from '@angular/forms';
+import { User } from '../models/user.interface';
 
 @Component({
   selector: 'app-login',
@@ -31,6 +32,8 @@ import { Validators, FormControl } from '@angular/forms';
 export class LoginComponent {
   public forumsFilled = false;
 
+  @Input() users: User[];
+
   @Output() cancelLogin = new EventEmitter();
   @Output() submitLogin = new EventEmitter<String>();
   username: string;
@@ -54,13 +57,16 @@ export class LoginComponent {
 
   validCredentials(): boolean {
     this.username = (<HTMLInputElement>document.getElementById("username")).value;
+    let success = false;    
+    
+    for (let user of this.users) {
+      if (this.username === user.name) {
+        success = true;
+      }
+    }
 
-    if (this.username) {
-      return true;
-    }
-    else { 
-      return false;
-    }
+    return success;
+
   }
 
   cancel() {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Post } from './models/post.interface';
 import { PostService } from './services/post.service';
+import { User } from './models/user.interface';
 
 @Component({
   selector: 'app-root',
@@ -28,6 +29,7 @@ import { PostService } from './services/post.service';
       <button class="fab" *ngIf="mobile && signedIn" mat-fab color="primary" (click)="createPost()">+</button>
       <app-login 
         *ngIf="showLoginWindow"
+        [users]="userList"
         (cancelLogin)="onCancelLogin()"
         (submitLogin)="onSubmitLogin($event)">
       </app-login>
@@ -78,6 +80,7 @@ export class AppComponent implements OnInit {
   showLoginWindow = false;
   filtering: boolean = false;
   error = false;
+  userList: User[] = [];
   currentPostFeed: Post[] = [];
   originalPostFeed: Post[] = [];
   username: string;
@@ -103,10 +106,19 @@ export class AppComponent implements OnInit {
     }
 
     this.loadPosts();
+    this.loadUsers();
   }
 
   toggleLoginWindow(){
     this.showLoginWindow = !this.showLoginWindow;
+  }
+
+  loadUsers() {
+    this.postService.getUsers()
+    .subscribe(users => {
+        this.userList = users;
+        console.log(users);
+      });
   }
 
   loadPosts() {
