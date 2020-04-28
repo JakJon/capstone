@@ -45,6 +45,8 @@ export class LoginComponent {
     if (this.validCredentials())
     {
       this.submitLogin.emit(this.username);
+      document.cookie = this.username;
+      console.log(document.cookie);
     } else {
       //TODO: handle this else case
     }

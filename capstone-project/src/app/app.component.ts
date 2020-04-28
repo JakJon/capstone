@@ -89,6 +89,13 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (document.cookie && document.cookie !== undefined && document.cookie !== "") {
+      this.username = document.cookie;
+      this.signedIn = true;
+    } else {
+      this.signedIn = false;
+    }
+
     if (screen.width < 768) {
       this.mobile = true;
     } else {
@@ -198,11 +205,10 @@ export class AppComponent implements OnInit {
   }
 
   logout() {
+    this.signedIn = false;
+    console.log(document.cookie += "; expires=Thu, 18 Dec 2000 12:00:00");
+    document.cookie += "; expires=Thu, 18 Dec 2000 12:00:00";
     document.location.reload();
-
-    //TODO: Do this when cahcing user session
-    // this.signedIn = false;
-    // this.username = "";
   }
 
   onCreatePost(post: Post) {
@@ -212,6 +218,7 @@ export class AppComponent implements OnInit {
 
   onDeletePost() {
     window.location.reload();
+    //TODO: turn the service call into a asyn function and await the return
   }
 
   onCancelComposition(cancel: boolean) {
