@@ -30,8 +30,8 @@ mat-slider {
 }
 
 .user-name {
-  @include md {
-    margin: 0 auto;
+  @include lg {
+    margin: 4px auto;
   }
   color: #3f51b5;
   cursor: pointer;
@@ -72,6 +72,13 @@ p {
 }
 
 .vidContainer {
+  @include md {
+    width: 250px;
+  }
+  @include lg {
+    margin: 8px auto;
+  }
+
   display: flex;
   flex-direction: column;
   align-items: center;

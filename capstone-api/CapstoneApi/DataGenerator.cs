@@ -73,8 +73,93 @@ public class DataGenerator
                 SongArtist="Bickle",
                 SongUrl="https://www.youtube.com/embed/A-io6KSX4_c?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=159",
                 Description="Crazy futuristic funky disco dance music 🕺 🌝"
+            },
+                                    new PostModel{
+                Id = 7,
+                User = "Jake",
+                SongTitle="Bambi",
+                SongArtist="Hippo Campus",
+                SongUrl="https://www.youtube.com/embed/ntthrYgpOKY?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0",
+                Description="Upbeat indie pop jam"
+            },
+                                    new PostModel{
+                Id = 8,
+                User = "Jake",
+                SongTitle="Addicted Youth",
+                SongArtist="Hemlock Ernst",
+                SongUrl="https://www.youtube.com/embed/fUS4W8pzr0w?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=30",
+                Description="Smooth laid back hip hop"
+            },                                    new PostModel{
+                Id = 9,
+                User = "Daryl",
+                SongTitle="No Rain",
+                SongArtist="Blind melon",
+                SongUrl="https://www.youtube.com/embed/3qVPNONdF58?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=10",
+                Description="A classic"
+            },                                    new PostModel{
+                Id = 10,
+                User = "Daryl",
+                SongTitle="Float on",
+                SongArtist="Modest Mouse",
+                SongUrl="https://www.youtube.com/embed/CTAud5O7Qqk?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=130",
+                Description="Another throw back from my childhood"
+            },                                    new PostModel{
+                Id = 11,
+                User = "Jake",
+                SongTitle="This Girl",
+                SongArtist="Kungs",
+                SongUrl="https://www.youtube.com/embed/2Y6Nne8RvaA?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=44",
+                Description="Throwback to summer of 16'"
+            },                                    new PostModel{
+                Id = 12,
+                User = "Jake",
+                SongTitle="Professor Caveman",
+                SongArtist="Toca La Guitarra",
+                SongUrl="https://www.youtube.com/embed/H_XZT5uxiU4?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=240",
+                Description="Hard Rock, cool guitar, this song is relatively unknown."
+            },                                    new PostModel{
+                Id = 13,
+                User = "Jake",
+                SongTitle="The adults are talking",
+                SongArtist="The Strokes",
+                SongUrl="https://www.youtube.com/embed/o4qsjmLxhow?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0",
+                Description="The strokes are back!"
+            },                                    new PostModel{
+                Id = 14,
+                User = "Jake",
+                SongTitle="Paper News",
+                SongArtist="Ritt Momney",
+                SongUrl="https://www.youtube.com/embed/xvGL-ctNH1A?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=62",
+                Description="Emotional rollercoaster"
+            },                                    new PostModel{
+                Id = 15,
+                User = "Jake",
+                SongTitle="Techno Show",
+                SongArtist="Peach Pit",
+                SongUrl="https://www.youtube.com/embed/R2LrGpHZ6wY?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=43",
+                Description="Indie pop rock with cool guitar solos"
+            },                                    new PostModel{
+                Id = 16,
+                User = "Alien",
+                SongTitle="Tell me lies",
+                SongArtist="Asoh Black!",
+                SongUrl="https://www.youtube.com/embed/0AdDA69QxVY?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0",
+                Description="Unknown rap artist who deserves some more love"
+            },                                    new PostModel{
+                Id = 17,
+                User = "Jake",
+                SongTitle="Sorry",
+                SongArtist="Hala",
+                SongUrl="https://www.youtube.com/embed/gRgVCEB5yVw?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=89",
+                Description="Upbeat indie rock. Feel Good Vibes ☀"
+            },                                    new PostModel{
+                Id = 18,
+                User = "Alien",
+                SongTitle="Shimmertraps",
+                SongArtist="Plume",
+                SongUrl="https://www.youtube.com/embed/k0k3EN9T3i0?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=18",
+                Description="Chill electronic synth waves 🏄‍♂️"
             }
-
 
         );
 

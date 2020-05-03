@@ -15,7 +15,7 @@ import { Validators, FormControl } from '@angular/forms';
       </mat-form-field>
       <mat-form-field class="password-input">
         <mat-label>Password</mat-label>
-        <input id="password" matInput [formControl]="passwordControl">
+        <input id="password" type="password" matInput [formControl]="passwordControl">
         <mat-error *ngIf="passwordControl.hasError('required')">
           Password is <strong>required</strong>
         </mat-error>

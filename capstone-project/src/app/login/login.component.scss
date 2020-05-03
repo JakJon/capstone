@@ -1,6 +1,20 @@
 @import '../variables.scss';
 
 mat-card {
+    @include md {
+        flex-direction: column;
+        width: 90%;
+        height: inherit;
+        padding: 8px;
+        align-items: center;
+    }
+    
+    @include lg {
+        width: 90%;
+        margin: 12px auto;
+        padding: 0;
+    }
+
     margin: 16px auto 0;
     padding: 8px 24px;
     box-shadow: 3px 3px 5px 6px #ccc;
